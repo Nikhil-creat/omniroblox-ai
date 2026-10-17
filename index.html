@@ -159,10 +159,10 @@ async function detect(){
     const lat=Math.round(performance.now()-t);const ids=(await r.json()).data.map(m=>m.id).filter(i=>!SKIP.some(s=>i.toLowerCase().includes(s)));
     const sorted=[...ids].sort((a,b)=>sz(a)-sz(b));
     const vis=ids.filter(i=>/scout|maverick|vision|llava/i.test(i));const text=ids.filter(i=>!/guard/i.test(i));
-    const fast=text.find(i=>/instant|8b|20b|flash/i.test(i))||sorted[0];
     const heavy=text.find(i=>/120b|70b|versatile/i.test(i))||sorted[sorted.length-1];
+    const fast=text.find(i=>i!==heavy&&/instant|flash|mini|(^|[^0-9])(8|17|20|32)b/i.test(i))||sorted.find(i=>i!==heavy&&!/compound/i.test(i))||heavy;
     fill($("fm"),ids,fast);fill($("hm"),ids,heavy);fill($("vm"),vis.length?vis:["(no vision model available)"],vis[0]);
-    $("s1").textContent=ids.length;$("s2").textContent=lat+"ms";
+    $("t_vis").textContent=vis.length?"Screenshot to UI":"Screenshot to UI (needs vision model)";$("s1").textContent=ids.length;$("s2").textContent=lat+"ms";
     $("ms").innerHTML=`[System State] <b>online</b> · ${ids.length} models · ${vis.length} vision`;
   }catch(e){$("ms").textContent="[System State] error: "+e.message}
 }
