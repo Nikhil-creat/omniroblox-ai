@@ -200,7 +200,7 @@ async function run(){
       pg.textContent="Step 3/3 · Reviewer";await agent("[Security & Optimization Audit]",H,SYS.rev,code)}
     else if(mode=="fix"){pg.textContent="Auto-patch running";await agent("[Auto-Patch]",H,SYS.fix,q)}
     else if(mode=="ui"){pg.textContent="UI agent running";await agent("[Vision / UI Analysis]",F,SYS.ui,q)}
-    else if(mode=="vis"){if(!/scout|maverick|vision|llava/i.test(V)){pg.textContent="No vision model available on your key.";$("r").disabled=false;return}
+    else if(mode=="vis"){if(!V||V.startsWith("(")){pg.textContent="No vision model on your Groq key right now. Use the UI to Luau tab and describe the screenshot in text.";$("r").disabled=false;return}
       pg.textContent="Vision agent running";const c=liveCard("[Vision / UI Analysis]");
       try{c.done(await stream(V,[{role:"system",content:SYS.ui},{role:"user",content:[{type:"text",text:q||"Convert this UI screenshot to Luau."},{type:"image_url",image_url:{url:imgData}}]}],c.on))}catch(e){c.err(e.message);throw e}}
     else{pg.textContent="Auditor running";await agent("[Security & Optimization Audit]",H,SYS.aud,q)}
