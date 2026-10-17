@@ -11,4 +11,4 @@ Agentic Roblox Studio engine: Planner / Coder / Reviewer / Auto-Patch on Groq wi
 4. Install plugin/OmniRoblox.server.lua in Studio (set BASE url, add header X-API-Key).
 5. luau/ has Maid, RemoteGuard, DataService templates. data/*.md is auto-ingested into Qdrant.
 
-Credit: Nikhil Chary Sriramoju
+Designed & developed by Nikhil Chary Sriramoju

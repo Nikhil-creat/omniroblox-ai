@@ -1,91 +1,167 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>OmniRoblox AI</title>
+<title>OmniRoblox AI | Agentic Roblox Studio Engine by Nikhil Chary Sriramoju</title>
+<meta name="description" content="Agentic Roblox Luau development engine: Planner, Coder, Reviewer and Auto-Patch agents on Groq. Designed and developed by Nikhil Chary Sriramoju.">
+<meta name="author" content="Nikhil Chary Sriramoju">
+<meta property="og:title" content="OmniRoblox AI"><meta property="og:description" content="Multi-agent Roblox Luau engine on Groq.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A4%96%3C/text%3E%3C/svg%3E">
 <style>
-:root{--bg:#0b0f1a;--card:#121a2b;--tx:#e6edf3;--mut:#8b98ad;--ac:#38bdf8;--ac2:#a78bfa;--bd:#22304a}
-@media(prefers-color-scheme:light){:root{--bg:#f4f7fb;--card:#fff;--tx:#0f172a;--mut:#51607a;--bd:#d6deeb}}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,sans-serif;padding:16px;padding-top:max(16px,env(safe-area-inset-top));padding-bottom:max(16px,env(safe-area-inset-bottom))}
-.w{max-width:820px;margin:auto}
-h1{font-size:26px;margin:4px 0;background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.s{color:var(--mut);margin:0 0 16px}
+:root{--bg:#070b14;--bg2:#0d1424;--card:#111a2e;--tx:#e6edf3;--mut:#8b98ad;--ac:#38bdf8;--ac2:#a78bfa;--ok:#34d399;--bd:#223250}
+:root[data-theme=light]{--bg:#f4f7fb;--bg2:#e9eef7;--card:#fff;--tx:#0f172a;--mut:#51607a;--bd:#d6deeb}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:radial-gradient(900px 500px at 80% -10%,#38bdf822,transparent),radial-gradient(700px 400px at -10% 20%,#a78bfa22,transparent),var(--bg);color:var(--tx);font:15px/1.6 system-ui,-apple-system,Segoe UI,sans-serif;padding-bottom:env(safe-area-inset-bottom)}
+a{color:var(--ac);text-decoration:none}.w{max-width:960px;margin:auto;padding:0 16px}
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--bd);padding-top:env(safe-area-inset-top)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:10px;height:54px}
+.logo{font-weight:800;background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent;font-size:18px}
+nav{display:flex;gap:14px;overflow-x:auto;scrollbar-width:none}nav a{color:var(--mut);font-size:13px;white-space:nowrap}
+.tg{background:transparent;border:1px solid var(--bd);color:var(--tx);border-radius:8px;padding:4px 9px;font-size:14px}
+.hero{padding:44px 0 24px}h1{font-size:clamp(30px,7vw,52px);line-height:1.1;margin:0 0 12px;background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--mut);max-width:620px;margin:0 0 16px;font-size:16px}
+.bdg{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}.bdg span{border:1px solid var(--bd);background:var(--card);border-radius:99px;padding:3px 11px;font-size:12px;color:var(--mut)}
+.btn{display:inline-block;background:linear-gradient(90deg,var(--ac),var(--ac2));color:#001;border:0;border-radius:10px;padding:11px 18px;font-weight:700;font-size:15px;cursor:pointer}
+.btn.g{background:transparent;color:var(--ac);border:1px solid var(--bd)}.btn:disabled{opacity:.5}
+section{padding:30px 0}h2{font-size:22px;margin:0 0 14px}
 .c{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:12px}
-label{display:block;font-size:12px;color:var(--mut);margin:0 0 4px}
-input,textarea{width:100%;background:transparent;color:var(--tx);border:1px solid var(--bd);border-radius:10px;padding:10px;font:inherit}
-textarea{min-height:90px;resize:vertical}
-button{background:linear-gradient(90deg,var(--ac),var(--ac2));color:#001;border:0;border-radius:10px;padding:11px 16px;font-weight:600;font-size:15px;margin-top:10px}
-button.g{background:transparent;color:var(--ac);border:1px solid var(--bd);padding:6px 10px;font-size:12px;margin:0}
-button:disabled{opacity:.5}
-pre{white-space:pre-wrap;word-break:break-word;overflow-x:auto;margin:8px 0 0;font:13px/1.45 ui-monospace,monospace}
-.h{display:flex;justify-content:space-between;align-items:center}
-.t{font-weight:600}.b{font-size:12px;color:var(--mut)}
-.row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-</style></head><body><div class="w">
-<h1>OmniRoblox AI</h1>
-<p class="s">Planner → Coder → Reviewer for Roblox Luau, powered by Groq. Runs in your browser.</p>
-<div class="c"><label>Groq API key (stays in this tab, never stored)</label>
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}.grid .c{margin:0}.grid h3{margin:0 0 4px;font-size:16px}.grid p{margin:0;color:var(--mut);font-size:14px}
+label{display:block;font-size:12px;color:var(--mut);margin:8px 0 4px}
+input,textarea,select{width:100%;background:transparent;color:var(--tx);border:1px solid var(--bd);border-radius:10px;padding:10px;font:inherit}
+select option{background:var(--card)}textarea{min-height:110px;resize:vertical}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.tabs{display:flex;gap:6px;overflow-x:auto;margin-bottom:8px}.tabs button{background:transparent;color:var(--mut);border:1px solid var(--bd);border-radius:99px;padding:5px 13px;font-size:13px;white-space:nowrap;cursor:pointer}
+.tabs button.on{background:var(--ac);color:#001;border-color:var(--ac);font-weight:700}
+.st{font-size:12px;color:var(--mut);margin-top:8px}.st b{color:var(--ok)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.chips button{background:var(--bg2);color:var(--mut);border:1px solid var(--bd);border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer;text-align:left}
+.h{display:flex;justify-content:space-between;align-items:center;gap:8px}.t{font-weight:700}
+.cp{background:transparent;color:var(--ac);border:1px solid var(--bd);border-radius:8px;padding:3px 9px;font-size:12px;cursor:pointer}
+pre{white-space:pre-wrap;word-break:break-word;overflow-x:auto;margin:8px 0 0;font:13px/1.5 ui-monospace,Menlo,monospace;background:var(--bg2);padding:10px;border-radius:10px;position:relative}
+.tx{white-space:pre-wrap;margin:8px 0 0}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px}.flow span.n{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:6px 10px}.flow i{color:var(--ac);font-style:normal}
+.chip{display:inline-block;margin:3px;border:1px solid var(--bd);background:var(--bg2);border-radius:8px;padding:4px 10px;font-size:13px}
+.me{display:flex;gap:14px;flex-wrap:wrap;align-items:center}.av{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--ac),var(--ac2));display:grid;place-items:center;font-weight:800;font-size:22px;color:#001}
+footer{border-top:1px solid var(--bd);margin-top:30px;padding:22px 0 30px;color:var(--mut);font-size:13px;text-align:center}footer b{color:var(--tx)}footer .l{display:flex;gap:14px;justify-content:center;margin:8px 0;flex-wrap:wrap}
+@media(max-width:520px){.r2{grid-template-columns:1fr}}
+</style></head><body>
+<header><div class="w nav"><div class="logo">OmniRoblox AI</div>
+<nav><a href="#playground">Playground</a><a href="#features">Features</a><a href="#architecture">Architecture</a><a href="#stack">Stack</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+<button class="tg" id="th" title="Theme">◐</button></div></header>
+<main class="w">
+<div class="hero"><div class="bdg"><span>Multi-agent</span><span>Groq</span><span>Luau --!strict</span><span>Open source</span></div>
+<h1>Build Roblox games with an autonomous AI dev team</h1>
+<p>Planner, Coder, Reviewer and Auto-Patch agents turn a feature idea into secure, typed Luau. Runs in your browser with your own Groq key. Full Docker backend included.</p>
+<a class="btn" href="#playground">Try it now</a> <a class="btn g" href="https://github.com/Nikhil-creat/omniroblox-ai">View source</a></div>
+
+<section id="playground"><h2>Playground</h2>
+<div class="c"><label>Groq API key (kept in this tab only, never stored or sent anywhere except Groq)</label>
 <input id="k" type="password" placeholder="gsk_..." autocomplete="off">
-<button id="d">Detect models</button><div class="b" id="ms" style="margin-top:8px">[System State] not connected</div></div>
-<div class="c"><label>Feature request or error log</label>
-<textarea id="p" placeholder="e.g. Coin pickup system with DataStore saving and anti-exploit remotes"></textarea>
-<div class="row"><button id="r">Build</button><button id="f" class="g">Fix error log</button></div></div>
-<div id="o"></div>
-<p class="b">Backend (Docker, Qdrant RAG, Studio plugin) is in the repo. See README.</p>
-</div>
+<div class="r2"><div><label>Fast model (Coder)</label><select id="fm"></select></div><div><label>Heavy model (Planner, Reviewer)</label><select id="hm"></select></div></div>
+<div class="row"><button class="btn" id="d">Detect models</button></div>
+<div class="st" id="ms">[System State] not connected</div></div>
+<div class="c"><div class="tabs" id="tb"></div>
+<label id="pl">Describe the feature</label><textarea id="p" placeholder="e.g. Coin pickup system with DataStore saving and anti-exploit remotes"></textarea>
+<div class="chips" id="ex"></div>
+<div class="row"><button class="btn" id="r">Run agents</button><button class="btn g" id="dl">Download .md</button><button class="btn g" id="cl">Clear</button></div>
+<div class="st" id="pg"></div></div>
+<div id="o"></div></section>
+
+<section id="features"><h2>Features</h2><div class="grid">
+<div class="c"><h3>Agent pipeline</h3><p>Planner defines client/server boundaries, Coder writes typed Luau, Reviewer hunts exploits.</p></div>
+<div class="c"><h3>Dynamic model routing</h3><p>Detects live Groq models at startup and lets you pick fast and heavy roles.</p></div>
+<div class="c"><h3>Security audit</h3><p>Remote injection, client authority, leaks and performance review on every build.</p></div>
+<div class="c"><h3>Auto-patch</h3><p>Paste a stack trace and get the root cause with a fixed block.</p></div>
+<div class="c"><h3>UI to Luau</h3><p>Describe a wireframe and get a scalable ScreenGui hierarchy.</p></div>
+<div class="c"><h3>RAG backend</h3><p>Qdrant with Roblox best practices, Redis session memory, Celery workers.</p></div></div></section>
+
+<section id="architecture"><h2>Architecture</h2><div class="c"><div class="flow">
+<span class="n">Studio plugin</span><i>→</i><span class="n">Nginx</span><i>→</i><span class="n">FastAPI + WebSocket</span><i>→</i><span class="n">Planner</span><i>→</i><span class="n">Coder</span><i>→</i><span class="n">Reviewer</span></div>
+<p class="st">FastAPI also talks to Qdrant (RAG), Redis (session memory, broker) and Celery workers. Groq models are detected at boot.</p></div></section>
+
+<section id="stack"><h2>Tech stack</h2><div class="c">
+<span class="chip">Python 3.11</span><span class="chip">FastAPI</span><span class="chip">Pydantic v2</span><span class="chip">Groq API</span><span class="chip">Qdrant</span><span class="chip">Redis</span><span class="chip">Celery</span><span class="chip">Docker Compose</span><span class="chip">Nginx</span><span class="chip">WebSockets</span><span class="chip">Luau</span><span class="chip">GitHub Pages</span></div></section>
+
+<section id="about"><h2>About the developer</h2><div class="c"><div class="me"><div class="av">NC</div><div>
+<div class="t">Nikhil Chary Sriramoju</div><div class="st" style="margin:0">B.Tech CSE (2023 – 2027), Vaagdevi College of Engineering · Thorrur, Telangana, India</div></div></div>
+<p class="tx">Final-year engineering student building agentic AI, RAG and data-engineering projects. Experience as Machine Learning Engineer Intern at Yuva Intern (NSDC) and Data Analytics Intern at Thiranex.</p>
+<div><span class="chip">NASSCOM · Skill India Digital Hub</span><span class="chip">IBM SkillsBuild · AI Fundamentals</span><span class="chip">Reliance Foundation · AI/ML Engineer</span></div></div></section>
+
+<section id="contact"><h2>Contact</h2><div class="c"><div class="row" style="margin:0">
+<a class="btn g" href="https://github.com/Nikhil-creat">GitHub</a>
+<a class="btn g" href="https://in.linkedin.com/in/nikhil-chary-sriramoju-95041b38a">LinkedIn</a>
+<a class="btn g" href="mailto:sriramojunikhil66@gmail.com">Email</a></div></div></section>
+</main>
+<footer><div class="w"><div>© 2026 <b>OmniRoblox AI</b>. Designed &amp; developed by <b>NIKHIL CHARY SRIRAMOJU</b></div>
+<div class="l"><a href="https://github.com/Nikhil-creat/omniroblox-ai">Source</a><a href="#playground">Playground</a><a href="#contact">Contact</a></div>
+<div>Not affiliated with Roblox Corporation or Groq. Your API key never leaves your browser except to call Groq.</div></div></footer>
+
 <script>
-const $=i=>document.getElementById(i);
-const B="https://api.groq.com/openai/v1";
-let fast=null,heavy=null;
-const SKIP=["whisper","guard","tts","playai","embed"];
-const size=n=>{const m=n.toLowerCase().match(/(\d+(?:\.\d+)?)b/);return m?+m[1]:0};
+const $=i=>document.getElementById(i),B="https://api.groq.com/openai/v1";
+const SKIP=["whisper","guard","tts","playai","embed","allam"];
+const sz=n=>{const m=n.toLowerCase().match(/(\d+(?:\.\d+)?)b/);return m?+m[1]:0};
+const SYS={
+plan:"You are a Roblox Planner. Split the feature into atomic ordered tasks with client/server boundaries, folder layout and DataStore schema. Be concise.",
+code:"You are a Roblox Coder. Output strict-typed idiomatic Luau (--!strict), ModuleScripts, CollectionService, rate-limited RemoteEvents with server validation, Maid cleanup. Each file in a fenced code block preceded by its path.",
+rev:"You are a Roblox security reviewer. List exploits (client authority, remote injection, missing validation), memory leaks and performance issues. Then give corrected code.",
+fix:"You are a Luau debugger. Isolate the root cause of this error or stack trace and return the fixed code block with short patch notes.",
+ui:"You are a Roblox UI engineer. Generate a Luau script that builds a ScreenGui hierarchy with UIListLayout, UIPadding, UIAspectRatioConstraint and UIScale for responsive scaling.",
+aud:"You are a Roblox security auditor. Review the pasted Luau for exploits, leaks and perf problems, rank findings by severity, then give a hardened version."};
+const MODES={build:["Build feature","Describe the feature","Coin pickup system with DataStore saving and anti-exploit remotes"],
+fix:["Fix error","Paste the error log and code","Players is not a valid member of Workspace ... Script:12"],
+ui:["UI to Luau","Describe the wireframe","Shop menu: title bar, scrolling grid of item cards, buy button, close button"],
+aud:["Audit code","Paste Luau code to audit","RemoteEvent.OnServerEvent:Connect(function(plr, amount) plr.leaderstats.Coins.Value += amount end)"]};
+const EX=["Round-based lobby with voting","Sword combat with server hit validation","Inventory with DataStore","Admin command system"];
+let mode="build",outs=[];
+const tb=$("tb");for(const k in MODES){const b=document.createElement("button");b.textContent=MODES[k][0];b.onclick=()=>setMode(k);b.id="t_"+k;tb.append(b)}
+function setMode(k){mode=k;for(const x in MODES)$("t_"+x).classList.toggle("on",x==k);$("pl").textContent=MODES[k][1];$("p").placeholder="e.g. "+MODES[k][2]}
+setMode("build");
+function chips(){const e=$("ex");e.textContent="";let h=[];try{h=JSON.parse(localStorage.getItem("orx")||"[]")}catch(_){}
+[...h,...EX].slice(0,6).forEach(t=>{const b=document.createElement("button");b.textContent=t.slice(0,48);b.onclick=()=>$("p").value=t;e.append(b)})}
+function save(t){try{const h=JSON.parse(localStorage.getItem("orx")||"[]").filter(x=>x!==t);h.unshift(t);localStorage.setItem("orx",JSON.stringify(h.slice(0,4)))}catch(_){}}
+chips();
+function fill(sel,ids,def){sel.textContent="";ids.forEach(i=>{const o=document.createElement("option");o.value=o.textContent=i;sel.append(o)});sel.value=def}
 async function detect(){
-  const key=$("k").value.trim(); if(!key){$("ms").textContent="[System State] enter key";return}
-  $("ms").textContent="[System State] detecting...";
-  const t=performance.now();
-  try{
-    const r=await fetch(B+"/models",{headers:{Authorization:"Bearer "+key}});
-    if(!r.ok)throw new Error("HTTP "+r.status);
-    const ids=(await r.json()).data.map(m=>m.id).filter(id=>!SKIP.some(s=>id.toLowerCase().includes(s)));
-    const sized=ids.filter(i=>size(i)>0).sort((a,b)=>size(a)-size(b));
-    const pool=sized.length?sized:ids;
-    fast=pool[0];heavy=pool[pool.length-1];
-    $("ms").textContent=`[System State] online ${Math.round(performance.now()-t)}ms | fast: ${fast} | heavy: ${heavy} | ${ids.length} models`;
+  const key=$("k").value.trim();if(!key){$("ms").textContent="[System State] enter your Groq key first";return}
+  $("ms").textContent="[System State] detecting...";const t=performance.now();
+  try{const r=await fetch(B+"/models",{headers:{Authorization:"Bearer "+key}});if(!r.ok)throw new Error("HTTP "+r.status);
+    const ids=(await r.json()).data.map(m=>m.id).filter(i=>!SKIP.some(s=>i.toLowerCase().includes(s)));
+    const sorted=[...ids].sort((a,b)=>sz(a)-sz(b));
+    const fast=ids.find(i=>/instant|8b|20b|scout|flash/i.test(i))||sorted[0];
+    const heavy=ids.find(i=>/120b|70b|versatile/i.test(i))||sorted[sorted.length-1];
+    fill($("fm"),ids,fast);fill($("hm"),ids,heavy);
+    $("ms").innerHTML=`[System State] <b>online</b> ${Math.round(performance.now()-t)}ms · ${ids.length} models detected · change roles above if you like`;
   }catch(e){$("ms").textContent="[System State] error: "+e.message}
 }
 async function chat(model,sys,usr){
-  const r=await fetch(B+"/chat/completions",{method:"POST",
-    headers:{Authorization:"Bearer "+$("k").value.trim(),"Content-Type":"application/json"},
-    body:JSON.stringify({model,temperature:.2,messages:[{role:"system",content:sys},{role:"user",content:usr}]})});
-  if(!r.ok)throw new Error("Groq HTTP "+r.status);
-  return (await r.json()).choices[0].message.content;
+  for(let a=0;a<2;a++){
+    const r=await fetch(B+"/chat/completions",{method:"POST",headers:{Authorization:"Bearer "+$("k").value.trim(),"Content-Type":"application/json"},
+      body:JSON.stringify({model,temperature:.2,messages:[{role:"system",content:sys},{role:"user",content:usr}]})});
+    if(r.status==429&&a==0){await new Promise(s=>setTimeout(s,3000));continue}
+    if(!r.ok)throw new Error("Groq HTTP "+r.status+" ("+model+")");
+    return (await r.json()).choices[0].message.content}
 }
-function card(title,text){
-  const c=document.createElement("div");c.className="c";
-  const h=document.createElement("div");h.className="h";
-  const t=document.createElement("span");t.className="t";t.textContent=title;
-  const b=document.createElement("button");b.className="g";b.textContent="Copy";
-  b.onclick=()=>navigator.clipboard.writeText(text);
-  const p=document.createElement("pre");p.textContent=text;
-  h.append(t,b);c.append(h,p);$("o").append(c);
-}
-const P="You are a Roblox Planner. Split the feature into atomic ordered tasks with client/server boundaries and DataStore schema.";
-const C="You are a Roblox Coder. Output strict-typed idiomatic Luau (--!strict), ModuleScripts, CollectionService, rate-limited RemoteEvents with server validation, Maid cleanup. Each file as a code block with its path.";
-const R="You are a Roblox security reviewer. List exploits, memory leaks and perf issues, then give corrected code.";
-const F="You are a Luau debugger. Isolate the root cause of this error and return the fixed block with patch notes.";
-async function run(fix){
-  if(!fast)await detect(); if(!fast)return;
-  const q=$("p").value.trim(); if(!q)return;
-  $("o").textContent="";$("r").disabled=$("f").disabled=true;
+function body(el,text){const re=/```(\w*)\n?([\s\S]*?)```/g;let last=0,m;
+  const add=s=>{if(s.trim()){const p=document.createElement("div");p.className="tx";p.textContent=s.trim();el.append(p)}};
+  while((m=re.exec(text))){add(text.slice(last,m.index));const pre=document.createElement("pre");pre.textContent=m[2];
+    const b=document.createElement("button");b.className="cp";b.textContent="Copy";b.style.cssText="position:absolute;top:6px;right:6px";b.onclick=()=>navigator.clipboard.writeText(m[2]);pre.append(b);el.append(pre);last=re.lastIndex}
+  add(text.slice(last))}
+function card(title,text){outs.push("## "+title+"\n\n"+text);const c=document.createElement("div");c.className="c";
+  const h=document.createElement("div");h.className="h";const t=document.createElement("span");t.className="t";t.textContent=title;
+  const b=document.createElement("button");b.className="cp";b.textContent="Copy all";b.onclick=()=>navigator.clipboard.writeText(text);
+  h.append(t,b);c.append(h);body(c,text);$("o").append(c);c.scrollIntoView({behavior:"smooth",block:"nearest"})}
+async function run(){
+  const q=$("p").value.trim();if(!q)return;if(!$("fm").value){await detect();if(!$("fm").value)return}
+  const F=$("fm").value,H=$("hm").value,pg=$("pg");$("r").disabled=true;save(q);chips();
   try{
-    if(fix){card("[Auto-Patch]",await chat(heavy,F,q))}
-    else{
-      const plan=await chat(heavy,P,q);card("[Architectural Blueprint]",plan);
-      const code=await chat(fast,C,"Plan:\n"+plan);card("[Luau Implementation]",code);
-      card("[Security & Optimization Audit]",await chat(heavy,R,code));
-    }
-  }catch(e){card("[Error]",e.message)}
-  $("r").disabled=$("f").disabled=false;
-}
-$("d").onclick=detect;$("r").onclick=()=>run(false);$("f").onclick=()=>run(true);
+    if(mode=="build"){pg.textContent="Step 1/3 · Planner running...";const plan=await chat(H,SYS.plan,q);card("[Architectural Blueprint]",plan);
+      pg.textContent="Step 2/3 · Coder running...";const code=await chat(F,SYS.code,"Plan:\n"+plan);card("[Luau Implementation]",code);
+      pg.textContent="Step 3/3 · Reviewer running...";card("[Security & Optimization Audit]",await chat(H,SYS.rev,code))}
+    else if(mode=="fix"){pg.textContent="Auto-patch running...";card("[Auto-Patch]",await chat(H,SYS.fix,q))}
+    else if(mode=="ui"){pg.textContent="UI agent running...";card("[Vision / UI Analysis]",await chat(F,SYS.ui,q))}
+    else{pg.textContent="Auditor running...";card("[Security & Optimization Audit]",await chat(H,SYS.aud,q))}
+    pg.textContent="Done. Next: paste into Studio, test, then run Audit on the final code."
+  }catch(e){card("[Error]",e.message);pg.textContent=""}
+  $("r").disabled=false}
+$("d").onclick=detect;$("r").onclick=run;$("cl").onclick=()=>{$("o").textContent="";outs=[];$("pg").textContent=""};
+$("dl").onclick=()=>{if(!outs.length)return;const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([outs.join("\n\n")],{type:"text/markdown"}));a.download="omniroblox-output.md";a.click()};
+$("th").onclick=()=>{const r=document.documentElement;r.dataset.theme=r.dataset.theme=="light"?"dark":"light"};
 </script></body></html>
